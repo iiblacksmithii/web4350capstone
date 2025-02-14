@@ -1,6 +1,7 @@
 # Import environ for Windows-compatible .env file handling
 import environ
 import os
+import sys
 from pathlib import Path
 
 # Initialize environment variables
@@ -16,6 +17,11 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 # Allowed hosts for Render deployment
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+
+# Fix for Render Build Command Issue (no such option: --noinput)
+if 'collectstatic' in sys.argv and '--noinput' in sys.argv:
+    sys.argv.remove('--noinput')
+    sys.argv.append('--no-input')
 
 # Application definition
 INSTALLED_APPS = [

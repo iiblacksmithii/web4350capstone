@@ -18,9 +18,12 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 # Allowed hosts for Render deployment
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
-# Fix for Render Build Command Issue (no such option: --noinput)
-if 'collectstatic' in sys.argv and '--noinput' in sys.argv:
-    sys.argv.remove('--noinput')
+# Adjust Render build command to avoid Poetry issues
+if 'collectstatic' in sys.argv:
+    try:
+        sys.argv.remove('--noinput')
+    except ValueError:
+        pass  # Safely handle missing '--noinput' flag
     sys.argv.append('--no-input')
 
 # Application definition

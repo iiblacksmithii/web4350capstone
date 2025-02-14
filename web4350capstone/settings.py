@@ -1,11 +1,11 @@
-# Import environ for .env file handling
+# Import environ for Windows-compatible .env file handling
 import environ
 import os
 from pathlib import Path
 
 # Initialize environment variables
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 # Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +15,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='unsafe-secret-key')
 DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 # Allowed hosts for Render deployment
-ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # Application definition
 INSTALLED_APPS = [
@@ -57,14 +57,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web4350capstone.wsgi.application'
 
-# Database settings
+# Database settings for SQLite or Render Postgres
 DATABASES = {
     'default': env.db('DATABASE_URL', default=f'sqlite:///{BASE_DIR}/db.sqlite3')
 }
 
-# Static files configuration
+# Static files configuration for Render deployment
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Default auto field
+# Default auto field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

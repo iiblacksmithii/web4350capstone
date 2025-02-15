@@ -6,8 +6,6 @@ def homepage(request):
     return HttpResponse("<h1>Welcome to Web4350Capstone Project!2</h1>")
 
 urlpatterns = [
-     path('admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    # path('admin/', admin.site.urls),
-    # path('', homepage),  # Add homepage route
+    path('admin/', admin.site.urls),
+    path('', homepage)  # Add homepage route
 ]

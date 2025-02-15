@@ -16,8 +16,9 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='unsafe-secret-key')
 DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 # Allowed hosts for Render deployment
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
-ALLOWED_HOSTS = ['your-render-url.onrender.com', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['your-render-url.onrender.com', 'localhost', '127.0.0.1']
 
 # Adjust Render build command to avoid Poetry issues
 if 'collectstatic' in sys.argv:

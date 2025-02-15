@@ -3,7 +3,7 @@ from django.urls import path
 from django.http import HttpResponse  # Add this line
 
 def homepage(request):
-    return HttpResponse("<h1>Welcome to Web4350Capstone Project!</h1>")
+    return HttpResponse("<h1>Welcome to Web4350Capstone Project!2</h1>")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
